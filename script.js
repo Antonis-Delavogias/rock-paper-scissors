@@ -17,18 +17,53 @@ function playRound(playerSelection, computerSelection) {
   } else if (playerLowChar === "rock" && computerSelection === "Scissor") {
     return `You Win! Rock crashes Scissor`;
   } else if (playerLowChar === "rock" && computerSelection === "Paper") {
-    return `You lose! Paper covers rock`;
+    return `You Lose! Paper covers rock`;
   } else if (playerLowChar === "paper" && computerSelection === "Rock") {
     return `You Win! Paper covers Rock`;
   } else if (playerLowChar === "paper" && computerSelection === "Scissor") {
-    return `You lose! Scissor cuts Paper`;
+    return `You Lose! Scissor cuts Paper`;
   } else if (playerLowChar === "scissor" && computerSelection === "Paper") {
     return `You Win! Scissor cuts paper`;
   } else if (playerLowChar === "scissor" && computerSelection === "Rock") {
-    return `You lose! Rock destroys scissor`;
+    return `You Lose! Rock destroys scissor`;
   }
 }
 
-const playerSelection = "paper";
 const computerSelection = getComputerChoice();
-console.log(playRound(playerSelection, computerSelection));
+
+function playGame() {
+  let playerScore = 0;
+  let computerScore = 0;
+
+  for (let i = 0; i < 5; i++) {
+    const userInput = String(
+      prompt(`Choose between Rock, Paper and Scissor.. Let's play!`)
+    );
+
+    const result = playRound(userInput, computerSelection);
+    console.log(result);
+
+    if (result?.includes("Win")) {
+      playerScore++;
+    } else if (result?.includes("Lose")) {
+      computerScore++;
+    }
+  }
+
+  if (playerScore > computerScore) {
+    return console.log(
+      `You Won the game! Your score: ${playerScore} vs ${computerScore}`
+    );
+  } else if (playerScore === computerScore) {
+    return console.log(
+      `It's a tie. Your score: ${playerScore} vs ${computerScore}`
+    );
+  } else {
+    return console.log(
+      `You lost the game. Your score: ${playerScore} vs ${computerScore}`
+    );
+  }
+}
+
+// Call the playGame function to start the game
+playGame();
